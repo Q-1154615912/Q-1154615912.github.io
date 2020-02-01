@@ -1,0 +1,94 @@
+---
+title: "如何搭建博客"
+date: 2020-02-01T14:38:20+08:00
+draft: false
+---
+
+一、安装Hugo
+
+如果你是macOS用户，请使用Homebrew快速安装，输入命令行：brew install hugo
+
+如果你是Windows用户，不知道Chocolatey或者Scoop是啥的话，可以直接下载编译好的压缩包（https://github.com/gohugoio/hugo/releases），解压即可。
+
+如果你是Debian或Ubuntu用户，请使用apt快速安装，即sudo apt-get install hugo
+
+基本上使用单行命令都可以成功安装Hugo，具体请移步https://gohugo.io/getting-started/installing
+
+二、生成博客
+
+使用如下命令新建一个名为“myhugo”的文件：
+
+hugo new site myhugo
+
+进入到myhugo文件进行克隆博客主题
+git clone https://github.com/Y4er/hugo-theme-easybook themes/easybook
+
+mysite/content是用来存放文档的地方，我们在其下建立一个新的Markdown文件：
+
+hugo new post/blog.md
+
+在blog.md中写入一些内容，使用如下命令进行本地预览：
+
+hugo server -t easybook --buildDrafts
+
+几乎瞬间编译成功，打开网址 http://localhost:1313/ 即可查看本地生成的静态网站。
+
+三、文章内的配置
+
+使用命令hugo new post/***.md新建Markdown文件之后，文章开头会有默认的被---包住的内容，这些内容即是该文章的配置。在/mysite/content/blod.md中可修改默认的配置。以下为我的默认配置：
+
+title: "如何搭建博客" # 文章标题
+
+date: {{ .Date }}    # 自动添加日期信息
+
+draft: true          # 设为false可被编译为HTML，true供本地修改
+
+comments : true      # 是否开启Disqus评论功能
+
+share : true         # 是否开启分享
+
+
+四、关于图片
+
+easybook主题需要设置一个作者头像，选好图片放置在/static/images并在/config.toml设置即可。
+
+五、发布网站到Gitee Pages
+
+在使用hugo server -t easybook --buildDrafts预览网站无误后可正式发布网站到域名供大家浏览。将要发布的文章内draft改为false后执行命令
+
+
+hugo --theme=easybook --baseUrl="https://gitee.com/chen_hong_qiong/ch.git/" --buildDrafts
+
+此时，在~/myhugo目录下会创建一个public的文件夹，将此文件夹下的所有内容git push到gitee上的chq.gitee.io仓库即可把博客部署到Gitee Pages中，我个人的博客地址为：https://gitee.com/chen_hong_qiong/ch
+
+在Gitee新建一个仓库命名为chq.gitee.io，其中chq改成自己的Gitee账户名；
+在/myhugo外建立一个平行的文件夹，此处假设也命名为/chq.gitee.io；
+进入/public文件夹将内容复制到/chq.gitee.io；
+将/chq.gitee.io的内容push到远程仓库。
+以上命令可在命令行通过以下语句实现：
+
+mkdir ShaneTian.github.io
+cd mysite/public
+cp -r . ../../ShaneTian.github.io
+cd ../../ShaneTian.github.io
+git init
+git add .
+git commit -m "commit message"
+git remote add origin https://github.com/ShaneTian/ShaneTian.github.io.git
+git push -u origin master
+
+完成以上命令后，等待一分钟左右即可在 https://shanetian.github.io/ 访问你的网站。
+以后每次更新文章后只用将生成的/public文件夹的静态网站内容复制到/ShaneTian.github.io，然后再push到远程仓库即可。也可将步骤写为Shell脚本，此处不再赘述。
+
+使用自己的域名
+当然，GitHub的域名怎么能满足装*的心理，这时可以将网站设置为自己的域名。购买域名的地方很多，如国外知名网站GoDaddy，简体中文页面、支持支付宝付款、不用备案等都带来了很多方便。我的域名suixinblog.cn即是在此购买。购买域名后完成下面两步即可访问自己的域名：
+
+在上面存放静态网站的Repository设置里面Custom domain填上自己的域名点击save；
+执行以下语句获得自己的GitHub Pages的IP：
+ping shanetian.github.io
+1
+即可得到下面的IP地址：
+
+3. 在域名提供商的网站配置DNS即可，以Godaddy为例配置两条记录如下：
+
+4. 可以在GitHub Pages设置强制https协议，这样你的网站就有安全锁啦
