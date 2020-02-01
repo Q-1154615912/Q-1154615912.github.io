@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Chq的博客</title>
+    <link>https://github.com/Q-1154615912/Q-1154615912.github.io/post/</link>
+    <description>Recent content in Posts on Chq的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 01 Feb 2020 14:38:20 +0800</lastBuildDate>
+    
+	<atom:link href="https://github.com/Q-1154615912/Q-1154615912.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>如何搭建博客</title>
+      <link>https://github.com/Q-1154615912/Q-1154615912.github.io/post/blog/</link>
+      <pubDate>Sat, 01 Feb 2020 14:38:20 +0800</pubDate>
+      
+      <guid>https://github.com/Q-1154615912/Q-1154615912.github.io/post/blog/</guid>
+      <description>一、安装Hugo
+如果你是macOS用户，请使用Homebrew快速安装，输入命令行：brew install hugo
+如果你是Windows用户，不知道Chocolatey或者Scoop是啥的话，可以直接下载编译好的压缩包（https://github.com/gohugoio/hugo/releases），解压即可。
+如果你是Debian或Ubuntu用户，请使用apt快速安装，即sudo apt-get install hugo
+基本上使用单行命令都可以成功安装Hugo，具体请移步https://gohugo.io/getting-started/installing
+二、生成博客
+使用如下命令新建一个名为“myhugo”的文件：
+hugo new site myhugo
+进入到myhugo文件进行克隆博客主题 git clone https://github.com/Y4er/hugo-theme-easybook themes/easybook
+mysite/content是用来存放文档的地方，我们在其下建立一个新的Markdown文件：
+hugo new post/blog.md
+在blog.md中写入一些内容，使用如下命令进行本地预览：
+hugo server -t easybook &amp;ndash;buildDrafts
+几乎瞬间编译成功，打开网址 http://localhost:1313/ 即可查看本地生成的静态网站。
+三、文章内的配置
+使用命令hugo new post/***.md新建Markdown文件之后，文章开头会有默认的被&amp;mdash;包住的内容，这些内容即是该文章的配置。在/mysite/content/blod.md中可修改默认的配置。以下为我的默认配置：
+title: &amp;ldquo;如何搭建博客&amp;rdquo; # 文章标题
+date: {{ .Date }} # 自动添加日期信息
+draft: true # 设为false可被编译为HTML，true供本地修改
+comments : true # 是否开启Disqus评论功能
+share : true # 是否开启分享
+四、关于图片
+easybook主题需要设置一个作者头像，选好图片放置在/static/images并在/config.toml设置即可。
+五、发布网站到Gitee Pages
+在使用hugo server -t easybook &amp;ndash;buildDrafts预览网站无误后可正式发布网站到域名供大家浏览。将要发布的文章内draft改为false后执行命令</description>
+    </item>
+    
+  </channel>
+</rss>
